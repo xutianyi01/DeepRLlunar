@@ -9,6 +9,7 @@ For horizontal and vertical position, horizontal and vertical velocity, angle an
 
 For left and right leg contact, I keep same as before, because only two possible values 0 and 1.
 
+--------
 Linear model is used to estimate the optimum Q-value(<a href="https://www.codecogs.com/eqnedit.php?latex=Q_{opt}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Q_{opt}" title="Q_{opt}" /></a>).
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=Q_{opt}(s,a)=w\phi(s,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Q_{opt}(s,a)=w\phi(s,a)" title="Q_{opt}(s,a)=w\phi(s,a)" /></a>
@@ -42,5 +43,24 @@ For left and right leg contact,
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\phi_k=1(s=1,&space;a=a_j)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi_k=1(s=1,&space;a=a_j)" title="\phi_k=1(s=1, a=a_j)" /></a>.
 
+### b.
+
+For Monte-Carlo policy gradient: REINFORCE, 3 layer neural network is chosen.  For the first layer, input is the states, output is 256 dimention neurons with fullly connection. Activation function is "relu". For the second layer, output is 256 dimention neurons with fullly connection. Activation function is "relu". For the third layer, output is 4 dimention neurons (4 actions). Activation function is "Softmax". Optimizer is Adam. Loss function is Categorical crossentropy.
+
+We don't need to use a memory class because we just keep track of the previous episode using a list then converts to the states.
+
+Step size is 0.005. discount factor is 0.99.
+
+### c.
+
+--------
+Hyperparameters for both algorithms
+Algorithm|Monte-Carlo policy gradient: REINFORCE  | n-step Sarsa with linear function approximation(n=1000)|
+---------|--------- | --------|
+Running episode|3000  | 3000 |
+Step size|0.005  | 0.03 |
+Exploration rate|None  | 0.1 |
+Discount factor|0.99  | 0.99 |
+Neural network|See __b.__  | None. Only linear function approximation can be seen __a.__|
 
 
