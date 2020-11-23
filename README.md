@@ -63,5 +63,8 @@ Exploration rate|None  | 0.1 |
 Discount factor|0.99  | 0.99 |
 Neural network|See __b.__  | None. Only linear function approximation can be seen __a.__|
 
+The results of both algorithms with 3000 episodes can be seen as follows:
 
-![pgvssarsa]()
+![pgvssarsa](https://github.com/xutianyi01/lunarlanderv2/blob/main/pgvssarsa.png)
+
+xlabel is episode number. ylabel is the average reward within previous 100 episodes at episode _t_. We can find REINFORCE totally win Sarsa after 1000 episodes. After 2500 episodes, REINFORCE can reach 200 average reward, and stably solve the  "lunar lander-v2" problem.
