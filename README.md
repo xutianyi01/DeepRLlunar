@@ -9,4 +9,38 @@ For horizontal and vertical position, horizontal and vertical velocity, angle an
 
 For left and right leg contact, I keep same as before, because only two possible values 0 and 1.
 
-Linear model is used to estimate the optimum Q-value(<a href="https://www.codecogs.com/eqnedit.php?latex=Q_{opt}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Q_{opt}" title="Q_{opt}" /></a>)
+Linear model is used to estimate the optimum Q-value(<a href="https://www.codecogs.com/eqnedit.php?latex=Q_{opt}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Q_{opt}" title="Q_{opt}" /></a>).
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=Q_{opt}(s,a)=w\phi(s,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Q_{opt}(s,a)=w\phi(s,a)" title="Q_{opt}(s,a)=w\phi(s,a)" /></a>
+
+where <a href="https://www.codecogs.com/eqnedit.php?latex=w" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w" title="w" /></a> is weight vector and <a href="https://www.codecogs.com/eqnedit.php?latex=\phi(s,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi(s,a)" title="\phi(s,a)" /></a> is a feature vector. Here, we set the orighinal <a href="https://www.codecogs.com/eqnedit.php?latex=w" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w" title="w" /></a> is a full zero vector. And we define <a href="https://www.codecogs.com/eqnedit.php?latex=\phi(s,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi(s,a)" title="\phi(s,a)" /></a> as this:
+
+For horizontal and vertical position, horizontal and vertical velocity, angle and angular velocity,
+
+if <a href="https://www.codecogs.com/eqnedit.php?latex=s\in" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s\in" title="s\in" /></a> [-1, 1],
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\phi_k=1(&space;round(Ls)=s'_i,&space;a=a_j)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi_k=1(&space;round(Ls)=s'_i,&space;a=a_j)" title="\phi_k=1( round(Ls)=s'_i, a=a_j)" /></a>
+
+where <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a> is the index of feature vector that depends on the setting of <a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a> and <a href="https://www.codecogs.com/eqnedit.php?latex=j" target="_blank"><img src="https://latex.codecogs.com/gif.latex?j" title="j" /></a>. For example, in my setting I set <a href="https://www.codecogs.com/eqnedit.php?latex=k=(i-1)j&plus;j" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k=(i-1)j&plus;j" title="k=(i-1)j+j" /></a>. <a href="https://www.codecogs.com/eqnedit.php?latex=round()" target="_blank"><img src="https://latex.codecogs.com/gif.latex?round()" title="round()" /></a> is a rounding function. <a href="https://www.codecogs.com/eqnedit.php?latex=L" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L" title="L" /></a> is a constant that scales [-1, 1] to [0, 4]. <a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a> is the index of bucket_index <a href="https://www.codecogs.com/eqnedit.php?latex=s'" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s'" title="s'" /></a>. <a href="https://www.codecogs.com/eqnedit.php?latex=j" target="_blank"><img src="https://latex.codecogs.com/gif.latex?j" title="j" /></a> is the index of action.
+
+if <a href="https://www.codecogs.com/eqnedit.php?latex=s\in" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s\in" title="s\in" /></a> (-inf, 1),
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\phi_k&space;=&space;1(a=a_j)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi_k&space;=&space;1(a=a_j)" title="\phi_k = 1(a=a_j)" /></a>
+
+where <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a> is equal to <a href="https://www.codecogs.com/eqnedit.php?latex=j" target="_blank"><img src="https://latex.codecogs.com/gif.latex?j" title="j" /></a>, which means the bucket_index of this type of the state is 0.
+
+if <a href="https://www.codecogs.com/eqnedit.php?latex=s\in" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s\in" title="s\in" /></a> (1, -inf),
+
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\phi_k&space;=&space;1(a=a_j)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi_k&space;=&space;1(a=a_j)" title="\phi_k = 1(a=a_j)" /></a>
+
+where <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a> is equal to <a href="https://www.codecogs.com/eqnedit.php?latex=4i&plus;j" target="_blank"><img src="https://latex.codecogs.com/gif.latex?4i&plus;j" title="4i+j" /></a>, which means the bucket_index of this type of the state is 4.
+
+For left and right leg contact, 
+
+<img src="https://latex.codecogs.com/gif.latex?\phi_k=1(s=0,&space;a=a_j)" title="\phi_k=1(s=0, a=a_j)" /></a>
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\phi_k=1(s=1,&space;a=a_j)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi_k=1(s=1,&space;a=a_j)" title="\phi_k=1(s=1, a=a_j)" /></a>.
+
+
+
