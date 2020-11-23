@@ -64,3 +64,4 @@ Discount factor|0.99  | 0.99 |
 Neural network|See __b.__  | None. Only linear function approximation can be seen __a.__|
 
 
+![pgvssarsa]()
