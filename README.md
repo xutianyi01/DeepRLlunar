@@ -45,9 +45,9 @@ For left and right leg contact,
 
 ### b.
 
-For Monte-Carlo policy gradient: REINFORCE, 3 layer neural network is chosen.  For the first layer, input is the states, output is 256 dimension neurons with fully connection. Activation function is "relu". For the second layer, output is 256 dimension neurons with fully connection. Activation function is "relu". For the third layer, output is 4 dimension neurons (4 actions). Activation function is "Softmax". Optimizer is Adam. Loss function is Categorical cross entropy.
+For Monte-Carlo policy gradient: REINFORCE, 3 layer neural network is chosen.  For the first layer, input is the states, output is 256 dimension neurons with fully connection. Activation function is "relu". For the second layer, output is 256 dimension neurons with fully connection. Activation function is "relu". For the third layer, output is 4 dimension neurons (4 actions). Activation function is "Softmax". Optimizer is Adam. Loss function is  <a href="https://www.codecogs.com/eqnedit.php?latex=-G_tlog\pi(A_t|S_t,\theta)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?-G_tlog\pi(A_t|S_t,\theta)" title="-G_tlog\pi(A_t|S_t,\theta)" /></a>, Note that <a href="https://www.codecogs.com/eqnedit.php?latex=log\pi(A_t|S_t,\theta)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?log\pi(A_t|S_t,\theta)" title="log\pi(A_t|S_t,\theta)" /></a> is cross entropy of softmaxed action prediction and labeled action.
 
-We don't need to use a memory class because we just keep track of the previous episode using a list then converts to the states.
+We don't need to use a memory class because we just keep track of the each episode by using a list and then convert to the states. So the batch size of each episode just this episode we generated.
 
 Step size is 0.005. discount factor is 0.99.
 
