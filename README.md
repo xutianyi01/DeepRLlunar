@@ -45,7 +45,7 @@ For left and right leg contact,
 
 ### b.
 
-For Monte-Carlo policy gradient: REINFORCE, 3 layer neural network is chosen.  For the first layer, input is the states, output is 256 dimention neurons with fullly connection. Activation function is "relu". For the second layer, output is 256 dimention neurons with fullly connection. Activation function is "relu". For the third layer, output is 4 dimention neurons (4 actions). Activation function is "Softmax". Optimizer is Adam. Loss function is Categorical crossentropy.
+For Monte-Carlo policy gradient: REINFORCE, 3 layer neural network is chosen.  For the first layer, input is the states, output is 256 dimension neurons with fully connection. Activation function is "relu". For the second layer, output is 256 dimension neurons with fully connection. Activation function is "relu". For the third layer, output is 4 dimension neurons (4 actions). Activation function is "Softmax". Optimizer is Adam. Loss function is Categorical cross entropy.
 
 We don't need to use a memory class because we just keep track of the previous episode using a list then converts to the states.
 
